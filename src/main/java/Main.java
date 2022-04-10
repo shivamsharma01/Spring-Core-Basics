@@ -5,16 +5,28 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
+import com.shivam04111992.CustomerService;
+
 public class Main {
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("employeebean.xml");
 		Employee e1 = (Employee) context.getBean("emp1");
 		Employee e2 = context.getBean("emp2", Employee.class);
 		System.out.println(e1 + " " + e2);
-		Resource resource = new ClassPathResource("employeebean.xml");
+
+		Resource resource = new ClassPathResource("customer.xml");
 		BeanFactory factory = new XmlBeanFactory(resource);
-		e1 = (Employee) factory.getBean("emp1");
-		e2 = factory.getBean("emp2", Employee.class);
-		System.out.println(e1 + " " + e2);
+		CustomerService customerService = factory.getBean("customerServiceProxy", CustomerService.class);
+
+		System.out.println("**********************");
+		customerService.printName();
+		System.out.println("**********************");
+		customerService.printURL();
+		System.out.println("**********************");
+		try {
+			customerService.printThrowException();
+		} catch (Exception e) {
+
+		}
 	}
 }
