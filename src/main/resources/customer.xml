@@ -3,11 +3,11 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!-- bean definitions here -->
-	<bean id="customerService" class="com.shivam04111992.CustomerService">
+	<bean id="customerService" class="com.shivam04111992.AOP.CustomerService">
 		<property name="name" value="Johnson"></property>
 		<property name="url" value="https://www.johnsonNjohnson.com"></property>
 	</bean>
-	<bean id="hijackBeforeMethodBean" class="com.shivam04111992.HijackBeforeMethod"></bean>
+	<bean id="hijackBeforeMethodBean" class="com.shivam04111992.AOP.HijackBeforeMethod"></bean>
 	<bean id="customerServiceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
 		<property name="target" ref="customerService" />
 		<property name="interceptorNames">
@@ -17,4 +17,7 @@
 		</property>
 	</bean>
 
+	<bean id="opBean" class="com.shivam04111992.Aspect.Operation"></bean>
+	<bean id="trackMyBean" class="com.shivam04111992.Aspect.Track"></bean>
+	<bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator"></bean>
 </beans>

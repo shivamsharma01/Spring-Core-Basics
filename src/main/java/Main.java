@@ -5,7 +5,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
-import com.shivam04111992.CustomerService;
+import com.shivam04111992.AOP.CustomerService;
+import com.shivam04111992.Aspect.Operation;
 
 public class Main {
 	public static void main(String[] args) {
@@ -28,5 +29,13 @@ public class Main {
 		} catch (Exception e) {
 
 		}
+
+		context = new ClassPathXmlApplicationContext("customer.xml");
+		Operation e = (Operation) context.getBean("opBean");
+		System.out.println("calling msg...");
+		e.msg();
+		System.out.println("calling m...");
+		e.m();
+		e.k();
 	}
 }
